@@ -3,6 +3,7 @@ import Home from './pages/Home.jsx';
 import Watchlist from './pages/Watchlist.jsx';
 import About from './pages/About.jsx';
 import Help from './pages/Help.jsx';
+import './App.css';
 
 function App() {
   return (
