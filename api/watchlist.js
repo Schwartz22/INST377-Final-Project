@@ -7,8 +7,9 @@ async function readBody(req) {
       data += chunk;
     });
     req.on("end", () => {
+      if (!data) return resolve({});
       try {
-        const json = data ? JSON.parse(data) : {};
+        const json = JSON.parse(data);
         resolve(json);
       } catch (err) {
         reject(err);
@@ -20,7 +21,6 @@ async function readBody(req) {
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
-    // Get all watchlist items
     const { data, error } = await supabase
       .from("watchlist")
       .select("*")
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
     if (error) {
       console.error("Supabase GET error:", error);
-      return res.status(500).json({ error: "Failed to load watchlist" });
+      return res.status(500).json({ error: error.message });
     }
 
     return res.status(200).json({ items: data });
@@ -40,7 +40,9 @@ export default async function handler(req, res) {
       const { anilist_id, title, poster_url } = body;
 
       if (!anilist_id || !title) {
-        return res.status(400).json({ error: "Missing anilist_id or title" });
+        return res
+          .status(400)
+          .json({ error: "Missing anilist_id or title" });
       }
 
       const { data, error } = await supabase
@@ -51,7 +53,7 @@ export default async function handler(req, res) {
 
       if (error) {
         console.error("Supabase POST error:", error);
-        return res.status(500).json({ error: "Failed to add to watchlist" });
+        return res.status(500).json({ error: error.message });
       }
 
       return res.status(201).json({ item: data });
@@ -61,7 +63,6 @@ export default async function handler(req, res) {
     }
   }
 
-  // Method not allowed
   res.setHeader("Allow", ["GET", "POST"]);
   return res.status(405).json({ error: "Method not allowed" });
 }
