@@ -37,14 +37,14 @@ cd INST377-Final-Project
 npm install
 
 **Create a .env.local file:**
-SUPABASE_URL=<your Supabase project URL>  
-SUPABASE_ANON_KEY=<your Supabase anon public key>
+SUPABASE_URL=https://siqmwrtmtrdqjciysiud.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpcW13cnRtdHJkcWpjaXlzaXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwMTg0OTYsImV4cCI6MjA4MTU5NDQ5Nn0.cZYU7Ggbil3wPd2osIH0RVlqNnfl9aEcb2HCgU4eCNg
 
 **Run the app locally:**
 npm run dev
 
 App runs at:
-http://localhost:5173/
+https://inst-377-final-project-ejuaru5gj-ethan-schwartzbergs-projects.vercel.app/
 
 ---
 
